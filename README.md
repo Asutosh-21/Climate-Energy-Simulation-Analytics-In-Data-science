@@ -1,4 +1,4 @@
-# 🌍 Global Climate & Energy Simulation Analytics
+# 🌍 Global Climate & Energy Simulation Analytics 
 
 **Domain:** Energy • Sustainability • Environment  
 
