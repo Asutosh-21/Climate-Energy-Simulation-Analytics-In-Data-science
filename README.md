@@ -7,6 +7,9 @@ It demonstrates **end-to-end data science, machine learning, and simulation skil
 
 ---
 
+![Architecture Diagram](architecture.png)
+
+
 ## 📌 Purpose & Problem Statement
 **Problem:**  
 Governments, utilities, and sustainability teams need to understand:
