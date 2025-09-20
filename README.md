@@ -5,9 +5,6 @@
 This project forecasts energy demand, models pollution impact, and simulates renewable vs. non-renewable adoption scenarios.  
 It demonstrates **end-to-end data science, machine learning, and simulation skills** that are valuable in consulting, energy, and climate-tech roles.
 
----
-
-![Architecture Diagram](architecture.png)
 
 
 ## 📌 Purpose & Problem Statement
