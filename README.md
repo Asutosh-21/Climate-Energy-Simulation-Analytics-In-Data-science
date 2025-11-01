@@ -78,5 +78,36 @@ Interactive Dashboard (Plotly Dash)
 * Quantitative assessment of how renewable-adoption rates influence emissions.
 * Business-ready visuals for policy makers and energy planners.
 
+## 🏃 Run locally (PowerShell)
+
+Use the included helper to start the Streamlit dashboard. From the repo root run:
+
+```powershell
+# (optional) create and activate a venv if you want an isolated environment
+python -m venv .venv
+#.\.venv\Scripts\Activate.ps1
+
+# Install dependencies
+pip install -r .\requirements.txt
+
+# Start the app (recommended):
+.\start-app.ps1
+
+# Or run directly using python -m to avoid PATH issues:
+python -m streamlit run .\app.py
+```
+
+Notes:
+- If `.venv` exists, `start-app.ps1` will use its Python executable. Otherwise it falls back to the system `python`.
+- If PowerShell blocks script execution, you may need to adjust execution policy (only if you trust the script):
+
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+```
+
+## ☁️ Deploy to Streamlit Cloud
+
+Push this repository to GitHub, then connect it from https://streamlit.io/cloud and choose the `main` branch. Streamlit Cloud will install packages from `requirements.txt` and run `streamlit run app.py` automatically.
+
 
 

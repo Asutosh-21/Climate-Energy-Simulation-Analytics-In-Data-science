@@ -1,0 +1,13 @@
+[theme]
+base = "light"
+primaryColor = "#0b6efd"
+backgroundColor = "#f7f9fc"
+secondaryBackgroundColor = "#ffffff"
+textColor = "#111827"
+font = "sans serif"
+
+[server]
+headless = true
+# Note: don't set enableCORS=false together with enableXsrfProtection=true (Streamlit will override it)
+# Leave CORS behaviour to defaults; set a custom port to avoid conflicts
+port = 8505

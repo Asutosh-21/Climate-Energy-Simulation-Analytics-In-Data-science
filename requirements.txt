@@ -1,0 +1,6 @@
+streamlit>=1.25.0
+pandas>=2.0.0
+altair>=5.0.0
+matplotlib>=3.7.0
+numpy>=1.24.0
+pycountry>=22.3.5
