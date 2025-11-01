@@ -125,7 +125,7 @@ def main():
             # avoid reset_index collisions by grouping with as_index=False
             rows_ts = df.groupby(year_like, as_index=False).agg(count=(year_like, "size"))
             spark = alt.Chart(rows_ts).mark_line(interpolate='monotone').encode(x=year_like, y='count')
-            c1.altair_chart(spark.properties(height=60), use_container_width=True)
+            c1.altair_chart(spark.properties(height=60), width='stretch')
 
         # Metric mean + sparkline
         if metric_choice:
@@ -135,7 +135,7 @@ def main():
                 # group with as_index=False to avoid creating duplicate column names when resetting index
                 m_ts = df_filtered.groupby(year_like, as_index=False)[metric_choice].mean()
                 spark2 = alt.Chart(m_ts).mark_line(interpolate='monotone').encode(x=year_like, y=metric_choice)
-                c2.altair_chart(spark2.properties(height=60), use_container_width=True)
+                c2.altair_chart(spark2.properties(height=60), width='stretch')
         else:
             c2.write("\n")
 
@@ -149,7 +149,7 @@ def main():
                 last_n = df_filtered.groupby(year_like, as_index=False)[metric_choice].mean().sort_values(by=year_like).tail(5)
                 if not last_n.empty:
                     spark3 = alt.Chart(last_n).mark_line().encode(x=year_like, y=metric_choice)
-                    c3.altair_chart(spark3.properties(height=60), use_container_width=True)
+                    c3.altair_chart(spark3.properties(height=60), width='stretch')
         else:
             c3.write("\n")
 
@@ -188,11 +188,11 @@ def main():
 
             base = alt.Chart(chart_df).encode(x=x_enc, y=alt.Y(metric_choice, title=metric_choice), tooltip=[metric_choice, entity_col, year_like])
             if chart_type == 'line':
-                st.altair_chart(base.mark_line(point=True).interactive().properties(height=450), use_container_width=True)
+                st.altair_chart(base.mark_line(point=True).interactive().properties(height=450), width='stretch')
             elif chart_type == 'area':
-                st.altair_chart(base.mark_area(opacity=0.4).interactive().properties(height=450), use_container_width=True)
+                st.altair_chart(base.mark_area(opacity=0.4).interactive().properties(height=450), width='stretch')
             else:
-                st.altair_chart(base.mark_bar().interactive().properties(height=450), use_container_width=True)
+                st.altair_chart(base.mark_bar().interactive().properties(height=450), width='stretch')
 
         # Additional visualizations: correlation heatmap and energy mix (stacked area)
         st.markdown("---")
@@ -222,7 +222,7 @@ def main():
                     strokeDash='metric:N',
                     tooltip=[year_like, 'metric', 'value', entity_col] if entity_col else [year_like, 'metric', 'value']
                 ).properties(height=400)
-                st.altair_chart(preset_chart.interactive(), use_container_width=True)
+                st.altair_chart(preset_chart.interactive(), width='stretch')
             else:
                 st.warning(f"None of the columns for the {selected_preset} preset are available in the current dataset")
 
@@ -250,7 +250,7 @@ def main():
                 tooltip=[x_col + ':N', y_col + ':N', val_col + ':Q']
             ).properties(height=500)
             text = heat.mark_text(baseline='middle', fontSize=11).encode(text=alt.Text(val_col + ':Q', format='.2f'))
-            st.altair_chart((heat + text).configure_axis(labelAngle=0), use_container_width=True)
+            st.altair_chart((heat + text).configure_axis(labelAngle=0), width='stretch')
 
         st.markdown("---")
         st.subheader("Energy mix (stacked area)")
@@ -293,7 +293,7 @@ def main():
                 color=alt.Color('source:N', title='Source'),
                 tooltip=[year_like + ':Q', 'source:N', 'value:Q']
             ).properties(height=400)
-            st.altair_chart(area.interactive(), use_container_width=True)
+            st.altair_chart(area.interactive(), width='stretch')
 
         # Choropleth map
         st.markdown("---")
@@ -345,7 +345,7 @@ def main():
                     height=400
                 )
                 
-                st.altair_chart((background + choropleth).configure_view(strokeWidth=0), use_container_width=True)    # ---------- Compare tab ----------
+                st.altair_chart((background + choropleth).configure_view(strokeWidth=0), width='stretch')    # ---------- Compare tab ----------
     with tab_compare:
         st.header("Compare — multi-country small multiples")
         st.markdown("Choose multiple entities in the sidebar to compare. Use normalization for fair comparisons.")
@@ -387,11 +387,11 @@ def main():
                     color=alt.Color(entity_col + ':N', legend=None),
                     tooltip=[entity_col, year_like, use_col]
                 ).properties(width=250, height=120).facet(row=entity_col)
-                st.altair_chart(chart, use_container_width=True)
+                st.altair_chart(chart, width='stretch')
             else:
                 # fallback: multiple lines on same chart
                 chart = alt.Chart(comp_df).mark_line(point=True).encode(x='index:Q', y=use_col, color=entity_col, tooltip=[entity_col, use_col]).interactive()
-                st.altair_chart(chart.properties(height=450), use_container_width=True)
+                st.altair_chart(chart.properties(height=450), width='stretch')
 
     # ---------- Export tab ----------
     with tab_export:

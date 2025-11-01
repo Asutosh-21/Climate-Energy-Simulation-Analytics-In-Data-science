@@ -9,5 +9,4 @@ font = "sans serif"
 [server]
 headless = true
 # Note: don't set enableCORS=false together with enableXsrfProtection=true (Streamlit will override it)
-# Leave CORS behaviour to defaults; set a custom port to avoid conflicts
-port = 8505
+# When deploying to Streamlit Cloud, do not set a fixed port here — the platform manages ports.
